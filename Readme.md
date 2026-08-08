@@ -1,6 +1,6 @@
 # Make Code Archive
 
-GitHub composite action that archives Shamrock (including submodules) and uploads the result as a workflow artifact.
+GitHub composite action that archives the repository calling it (including submodules) and uploads the result as a workflow artifact.
 
 ## Usage
 
