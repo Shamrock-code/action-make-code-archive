@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: shamrock-dev/action-make-code-archive@v1
+      - uses: shamrock-dev/action-make-code-archive@v1.1
         with:
           output_name: archive_name.tar.gz
 ```
