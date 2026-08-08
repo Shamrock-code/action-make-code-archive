@@ -35,16 +35,14 @@ runs:
 
     - name: Archive repository with submodules
       shell: bash
-      run: ./git-archive-all.sh --format tar.gz --prefix archive
+      run: ./git-archive-all.sh --format tar.gz
 
     - name: Rename archive
       shell: bash
       run: |
-        archive="archive.tar.gz"
+        archive="$(basename "$(git rev-parse --show-toplevel)").tar"
         if [[ ! -f "$archive" ]]; then
           echo "Expected archive not found: $archive"
-          echo "Contents of current directory:"
-          ls -la .
           exit 1
         fi
         mv "$archive" ${{ inputs.output_name }}
