@@ -33,14 +33,19 @@ runs:
         wget https://raw.githubusercontent.com/fabacab/git-archive-all.sh/refs/heads/master/git-archive-all.sh
         chmod +x git-archive-all.sh
 
-    - name: Archive Shamrock with submodules
+    - name: Archive repository with submodules
       shell: bash
       run: ./git-archive-all.sh
 
     - name: Compress archive
       shell: bash
       run: |
-        gzip -c Shamrock.tar > /tmp/${{ inputs.output_name }}
+        archive="$(basename "$(git rev-parse --show-toplevel)").tar"
+        if [[ ! -f "$archive" ]]; then
+          echo "Expected archive not found: $archive"
+          exit 1
+        fi
+        gzip -c "$archive" > /tmp/${{ inputs.output_name }}
         mv /tmp/${{ inputs.output_name }} .
 
     - name: Upload artifact
