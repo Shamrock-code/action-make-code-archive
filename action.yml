@@ -40,7 +40,7 @@ runs:
     - name: Rename archive
       shell: bash
       run: |
-        archive="$(basename "$(git rev-parse --show-toplevel)").tar"
+        archive="$(basename "$(git rev-parse --show-toplevel)").tar.gz"
         if [[ ! -f "$archive" ]]; then
           echo "Expected archive not found: $archive"
           exit 1
