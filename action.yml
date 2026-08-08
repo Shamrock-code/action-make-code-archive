@@ -35,18 +35,17 @@ runs:
 
     - name: Archive repository with submodules
       shell: bash
-      run: ./git-archive-all.sh
+      run: ./git-archive-all.sh --format=tar.gz --prefix archive
 
-    - name: Compress archive
+    - name: Rename archive
       shell: bash
       run: |
-        archive="$(basename "$(git rev-parse --show-toplevel)").tar"
+        archive="archive.tar.gz"
         if [[ ! -f "$archive" ]]; then
           echo "Expected archive not found: $archive"
           exit 1
         fi
-        gzip -c "$archive" > /tmp/${{ inputs.output_name }}
-        mv /tmp/${{ inputs.output_name }} .
+        mv "$archive" ${{ inputs.output_name }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
