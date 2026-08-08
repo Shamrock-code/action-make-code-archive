@@ -35,7 +35,7 @@ runs:
 
     - name: Archive repository with submodules
       shell: bash
-      run: ./git-archive-all.sh --format=tar.gz --prefix archive
+      run: ./git-archive-all.sh --format tar.gz --prefix archive
 
     - name: Rename archive
       shell: bash
